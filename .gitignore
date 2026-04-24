@@ -1,0 +1,19 @@
+# Visual Studio build folders
+lib/Debug/
+lib/Release/
+lib/x64/
+bin/c2-build-demo/Cathcheer.exe.WebView2/
+*.obj
+*.pdb
+*.user
+*.aps
+*.tlog
+*.log
+*.recipe
+*.ilk
+*.iobj
+*.ipdb
+.vs/
+ipch/
+*.opendb
+*.db

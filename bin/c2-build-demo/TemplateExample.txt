@@ -1,0 +1,52 @@
+___________________________________
+
+Catcheer!! 1.0v
+___________________________________
+
+*Configure launch options from "config.ini"
+
+$-Default config.ini exampe:
+
+---------------------------------
+[Window]
+title = "gamename"
+size = "1920x1080"
+border = true
+fullscreen = false
+resizable = true
+-----------------------------------
+
+$-Put Custom icon in the catcheer empty project folder
+$-Put HTML file in "_game" folder
+
+(Full-Project estructure example):
+________________________________________
+
+/EmptyProject-Catcher!!
+ +
+ |__(/_game)
+ |    +
+ |    |__(game.html)
+ |
+ |___(/Catcheer.exe.WebView2)
+ |
+ |_(config.ini)
+ |
+ |_(custom.ico)
+ |
+ |_(WebView2Loader.dll)
+ |
+ |_(Cathcheer.exe)
+ |
+ |_(TemplateExample.txt)"this file v:"
+
+__________________________________________
+
+Catcher1.0 10/09/2025
+OLDGAME-Proyect
+
+Itch.io : https://oldgame-proyect.itch.io/
+youtube : https://www.youtube.com/@OLDGAMEProyect
+):TikTok: https://www.tiktok.com/@oldgame.proyect
+
+(; 
