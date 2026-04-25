@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------------------------------------
 // Requisitos previos: 
 // - Paquete Microsoft.Web.WebView2 instalado por NuGet.
+// - Paquete Microsoft.Windows.ImplementationLibrary instalado por NuGet (para wil::com_ptr).
 // - El recurso 'IDR_HTML1' de tipo RT_HTML configurado en resources.h
 //----------------------------------------------------------------------------------------------------
 // Para compilar en Visual Studio: asegúrese de usar como estándar de lenguaje C++17 (o posterior).
