@@ -1,80 +1,103 @@
-> Catcher is a simple application focused on video games that allows you to reproduce/distribute your HTML/WEB games for Windows with greater ease, 
->compatibility and control over the system and the aesthetics of the experience that the developer is looking for. Catcher works with Webview2
+# Catcheer!
 
-Virustotal Results (2/66)
-[1.2v 24/4/26 14:08](https://www.virustotal.com/gui/file/2078824339291e4d3cbc7c9f956e1759656f2f4a697df1ea9cc5698a5af9ab76?nocache=1)
+Bienvenido al repositorio oficial de catcheer una herramienta programada en c++ de codigo abierto pensada en desarolladores de videojuegos pero tambien util para 
+algunas aplicaciones sencillas creadas en html tradicional
 
-## First release (1.2v)
----
-### Features:
+## ¿ Que es Catcheer?
 
-Management and modification of basic window appearance:
-(Size, position, title)
+Catcheer es un "cargador" de [html](https://es.wikipedia.org/wiki/HTML) minimalista el cual solo proriza la experiencia mas optima y fluida posible tanto como para el usuario final (cliente) como para el desarollador al tener una facilidad de uso increible en el proceso de compilacion y o empaquetado de un producto sea software o programa basado en [html](https://es.wikipedia.org/wiki/HTML) o para el cliente con una optimizacion agresiva por medios de flags agresivos para el GPU y ventana del webkit
 
--Full screen support
+## La filosofia de unix
 
--WebGL support
+>Haz una cosa y hazla bien.
 
--Initial state configuration with a "config.ini" file:
-(Force full screen, initial window size, initial window position, initial window title)
+ catcheer solo llama a el webkit de el sistema operativo (Os) predeterminado tal como lo es en Windows [Webview2](https://developer.microsoft.com/es-es/microsoft-edge/webview2/?form=MA13LH) O en linux con [GTK](https://webkitgtk.org/) 
 
--Loading custom icons for the taskbar and window with a "custom.ico" file
----
+## ¿ Como usar Catcheer ? (Manual para desarolladores)
 
- >Catcher uses a minimum of 70 MB of memory when running.
+ Como se menciona antes catcheer es ridiculamente facil de utilizar sobre todo para programadores su uso es tan facil como:
 
- ##### catcher_1.2build_32_bits
+ **1. Prepare su archivo index.html** con todas sus dependencias dentro de la carpeta **Source**
+ >La carpeta a la que se refiere en este repositorio como **Source** va junto al ejecutable de catcheer y debe llamarse "s-folder" si usa la version de Windows o "source" si usa la version de linux,Esto es puramente estetico y puede modificarlo desde el codigo fuente en el modulo del nucleo de Windows: `\lib\core\windows_webview2\webview2.cpp`, Y para el nucle de linux: `lib\core\linux_gtk\gtk.cpp` puede encontrarlo en ambos modulos con el comentario: `//------------------------html file load`
 
+**2. Configure la ventana inicial**
+>Para "preparar" la configuracion de la ventana inicial solo debe abrir  un editor de texto plano y escribir el contenido donde establecera propiedades 
+>basicas de la ventana como :
+> - Tamano de ventana en pixeles
+> - Pantalla completa o no
+> - Posibilidad de cambiar el tamano 
+> - Titulo de la ventana
+> - Activacion o desactivacion del marco de la ventana
+> Dependiendo de la plataforma el contenido para definir la configuracion inicial es el siguiente:
+>
+> **Linux Config Template** ;
+> ```
+> {
+>       "title": "catcheer-linux-gtk-debug",
+>       "width": 937,
+>       "height": 545,
+>       "fullscreen": "false",
+>       "resizable": "true"
+>
+>} 
+>```
+>
+>**Windows Config Template** ;
+> ```
+>[Window]
+>title = catcheer-debug-webview2-windows
+>size = 800x470
+>border = true
+>fullscreen = false
+>resizable = true
+>
+> ```
+**3. Icono**;
+> Para personalizar mas su producto final puede anadir un icono personalizado de manera muy simple .
+> Para la plataforma de Windows debera simplemente mover o copiar un archivo `custom.ico` junto al ejecutable 
+> Para la plataforma de Linux debera usar un `custom.png` el cual se aplicara solo a la ventana , tambien  puede personalizarlo en el nucleo de linux o windows , puede conseguirlo en ambos nucleos con el comentario: `//------------------set icon|`
 
- ---
- Some catcher functions have been fixed and made easier with simple messages. You can find them and their functions below or check the default index.html that comes with catcher in the "_game" folder.     
- ---
+## Uso avanzado para programadores (**API**)
+
+Catcheer ofrece una "api" basada en mensajes web sencillos para facilitar operaciones basicas como lectura/escritura de archivos, modificacion de ventanas y mas mostradas a continuacion:
+
+### Metodo de posteo de mensajes especifico :
  ```
 window.chrome.webview.postMessage
 ```
- // Windows state
- ```
-{ action: "getWindowPosition" }
-{ action: "getWindowSize" }
-{ action: "setWindowPosition", x, y }
-{ action: "setWindowSize", width, height }
-{ action: "toggleFullscreen" }
-{ action: "setWindowTitle", value: v }
-{ action: "closeWindow" }
-```
+### Ventanas tamanos,posiciones y mas estilos
+**Obtener posicion de ventana** 
+`{ action: "getWindowPosition" }`
+**Obtener tamano de ventana**
+`{ action: "getWindowSize" }`
+**Establecer posicion de ventana**
+`{ action: "setWindowPosition", x, y }`
+**EStablecer tamano de ventana**
+`{ action: "setWindowSize", width, height }`
+**Lanzar a pantalla completa**
+`{ action: "toggleFullscreen" }`
+**Establecer nuevo titulo de ventana**
+`{ action: "setWindowTitle", value: v }`
+**Cerrar ventana**
+`{ action: "closeWindow" }`
 
-// Files
-```
-{ action: "readFile", path }
-{ action: "writeFile", path, content: txt }
-{ action: "LastFileWriteContent" }
-{ action: "openFile", path }
-```
+### Archivos locales
+**Leer archivo**
+`{ action: "readFile", path }`
+**Escribir Archivo**
+`{ action: "writeFile", path, content: txt }`
+**Abrir/Ejecutar Fichero**
+`{ action: "openFile", path }`
 
-// Windows
-```
-{ action: "newWindow" }
-{ action: "newWindow", path }  //"_game/index2.html" 
-```
 
-// Browser Call
-```
-{ action: "callBrowser", url }
-```
+## Ejecucion de una nueva ventana
+>Importante esta funcion no lee archivos dentro de "Source" por defecto sino tomando referencia de la carpeta raiz junto al ejecutable
+`{ action: "newWindow", path }`
 
-// Others
-```
-{ action: "get_document_in_pc_direction" }
-```
----
-## Construct 2
-
-To export to Catcher with Construct 2, simply export your project to HTML5 and copy all the generated content from the main folder containing "index.html" to the "_game" folder in Catcher.
-
->Catcher plugin 1.2v for construct 2
-
-[Download C2Plugin](https://github.com/nzxy-dev/Catcheer/releases/download/Plugins/Catcher1_2v-Plugin_for_C2.zip)
-
-[PeojectTemplateCapxC2](https://github.com/nzxy-dev/Catcheer/tree/main/extra/Construct2/demo/testC2capx)
+## Llamar al navegador (Abrir url en el navegador predeterminado)
+>En linux esta opcion suele fallar por lo que se  recomienda usar la funcion de abrir archivo 
+`{ action: "callBrowser", url }`
+## Obtener direccion de ejecucion en el dispositivo
+`{ action: "get_document_in_pc_direction" }`
 
 
