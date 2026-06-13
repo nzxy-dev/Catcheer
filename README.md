@@ -1,103 +1,98 @@
 # Catcheer!
 
-Bienvenido al repositorio oficial de catcheer una herramienta programada en c++ de codigo abierto pensada en desarolladores de videojuegos pero tambien util para 
-algunas aplicaciones sencillas creadas en html tradicional
+Welcome to the official repository of catcheer, an open-source tool programmed in C++ designed for video game developers but also useful for some simple applications created in traditional HTML.
 
-## ¿ Que es Catcheer?
+## What is Catcheer?
 
-Catcheer es un "cargador" de [html](https://es.wikipedia.org/wiki/HTML) minimalista el cual solo proriza la experiencia mas optima y fluida posible tanto como para el usuario final (cliente) como para el desarollador al tener una facilidad de uso increible en el proceso de compilacion y o empaquetado de un producto sea software o programa basado en [html](https://es.wikipedia.org/wiki/HTML) o para el cliente con una optimizacion agresiva por medios de flags agresivos para el GPU y ventana del webkit
+Catcheer is a minimalist [html](https://es.wikipedia.org/wiki/HTML) "loader" that prioritizes the most optimal and fluid experience possible both for the end user (client) and for the developer. It offers incredible ease of use in the compilation and/or packaging process of a product, whether it is software or a program based on [html](https://es.wikipedia.org/wiki/HTML), and provides the client with aggressive optimization through aggressive flags for the GPU and the webkit window.
 
-## La filosofia de unix
+## The Unix Philosophy
 
->Haz una cosa y hazla bien.
+> Do one thing and do it well.
 
- catcheer solo llama a el webkit de el sistema operativo (Os) predeterminado tal como lo es en Windows [Webview2](https://developer.microsoft.com/es-es/microsoft-edge/webview2/?form=MA13LH) O en linux con [GTK](https://webkitgtk.org/) 
+catcheer only calls the default operating system (OS) webkit, such as [Webview2](https://developer.microsoft.com/es-es/microsoft-edge/webview2/?form=MA13LH) in Windows or [GTK](https://webkitgtk.org/) in Linux.
 
-## ¿ Como usar Catcheer ? (Manual para desarolladores)
+## How to use Catcheer? (Developer Manual)
 
- Como se menciona antes catcheer es ridiculamente facil de utilizar sobre todo para programadores su uso es tan facil como:
+As mentioned before, catcheer is ridiculously easy to use, especially for programmers. Its use is as easy as:
 
- **1. Prepare su archivo index.html** con todas sus dependencias dentro de la carpeta **Source**
- >La carpeta a la que se refiere en este repositorio como **Source** va junto al ejecutable de catcheer y debe llamarse "s-folder" si usa la version de Windows o "source" si usa la version de linux,Esto es puramente estetico y puede modificarlo desde el codigo fuente en el modulo del nucleo de Windows: `\lib\core\windows_webview2\webview2.cpp`, Y para el nucle de linux: `lib\core\linux_gtk\gtk.cpp` puede encontrarlo en ambos modulos con el comentario: `//------------------------html file load`
+**1. Prepare your index.html file** with all its dependencies inside the **Source** folder.
+> The folder referred to in this repository as **Source** goes next to the catcheer executable and must be named "s-folder" if you use the Windows version or "source" if you use the Linux version. This is purely aesthetic and you can modify it from the source code in the Windows core module: `\lib\core\windows_webview2\webview2.cpp`, and for the Linux core: `lib\core\linux_gtk\gtk.cpp`. You can find it in both modules with the comment: `//------------------------html file load`
 
-**2. Configure la ventana inicial**
->Para "preparar" la configuracion de la ventana inicial solo debe abrir  un editor de texto plano y escribir el contenido donde establecera propiedades 
->basicas de la ventana como :
-> - Tamano de ventana en pixeles
-> - Pantalla completa o no
-> - Posibilidad de cambiar el tamano 
-> - Titulo de la ventana
-> - Activacion o desactivacion del marco de la ventana
-> Dependiendo de la plataforma el contenido para definir la configuracion inicial es el siguiente:
+**2. Configure the initial window**
+> To "prepare" the configuration of the initial window, you only need to open a plain text editor and write the content where you will establish basic window properties such as:
+> - Window size in pixels
+> - Fullscreen or not
+> - Resizable or not
+> - Window title
+> - Window frame activation or deactivation
+> Depending on the platform, the content to define the initial configuration is as follows:
 >
 > **Linux Config Template** ;
 > ```
 > {
->       "title": "catcheer-linux-gtk-debug",
->       "width": 937,
->       "height": 545,
->       "fullscreen": "false",
->       "resizable": "true"
+>        "title": "catcheer-linux-gtk-debug",
+>        "width": 937,
+>        "height": 545,
+>        "fullscreen": "false",
+>        "resizable": "true"
 >
->} 
->```
->
->**Windows Config Template** ;
+> } 
 > ```
->[Window]
->title = catcheer-debug-webview2-windows
->size = 800x470
->border = true
->fullscreen = false
->resizable = true
+>
+> **Windows Config Template** ;
+> ```
+> [Window]
+> title = catcheer-debug-webview2-windows
+> size = 800x470
+> border = true
+> fullscreen = false
+> resizable = true
 >
 > ```
-**3. Icono**;
-> Para personalizar mas su producto final puede anadir un icono personalizado de manera muy simple .
-> Para la plataforma de Windows debera simplemente mover o copiar un archivo `custom.ico` junto al ejecutable 
-> Para la plataforma de Linux debera usar un `custom.png` el cual se aplicara solo a la ventana , tambien  puede personalizarlo en el nucleo de linux o windows , puede conseguirlo en ambos nucleos con el comentario: `//------------------set icon|`
+**3. Icon**;
+> To further customize your final product, you can add a custom icon very easily.
+> For the Windows platform, you simply need to move or copy a `custom.ico` file next to the executable.
+> For the Linux platform, you must use a `custom.png` which will be applied only to the window. You can also customize it in the Linux or Windows core; you can find it in both cores with the comment: `//------------------set icon|`
 
-## Uso avanzado para programadores (**API**)
+## Advanced usage for programmers (**API**)
 
-Catcheer ofrece una "api" basada en mensajes web sencillos para facilitar operaciones basicas como lectura/escritura de archivos, modificacion de ventanas y mas mostradas a continuacion:
+Catcheer offers an "api" based on simple web messages to facilitate basic operations such as reading/writing files, window modification, and more, shown below:
 
-### Metodo de posteo de mensajes especifico :
- ```
-window.chrome.webview.postMessage
-```
-### Ventanas tamanos,posiciones y mas estilos
-**Obtener posicion de ventana** 
-`{ action: "getWindowPosition" }`
-**Obtener tamano de ventana**
+### Specific message posting method:
+
+`window.chrome.webview.postMessage`
+
+### Window sizes, positions, and more styles
+**Get window position** `{ action: "getWindowPosition" }`
+**Get window size**
 `{ action: "getWindowSize" }`
-**Establecer posicion de ventana**
+**Set window position**
 `{ action: "setWindowPosition", x, y }`
-**EStablecer tamano de ventana**
+**Set window size**
 `{ action: "setWindowSize", width, height }`
-**Lanzar a pantalla completa**
+**Toggle fullscreen**
 `{ action: "toggleFullscreen" }`
-**Establecer nuevo titulo de ventana**
+**Set new window title**
 `{ action: "setWindowTitle", value: v }`
-**Cerrar ventana**
+**Close window**
 `{ action: "closeWindow" }`
 
-### Archivos locales
-**Leer archivo**
+### Local files
+**Read file**
 `{ action: "readFile", path }`
-**Escribir Archivo**
+**Write File**
 `{ action: "writeFile", path, content: txt }`
-**Abrir/Ejecutar Fichero**
+**Open/Execute File**
 `{ action: "openFile", path }`
 
 
-## Ejecucion de una nueva ventana
->Importante esta funcion no lee archivos dentro de "Source" por defecto sino tomando referencia de la carpeta raiz junto al ejecutable
+## Execution of a new window
+> Important: this function does not read files inside "Source" by default, but instead takes reference from the root folder next to the executable.
 `{ action: "newWindow", path }`
 
-## Llamar al navegador (Abrir url en el navegador predeterminado)
->En linux esta opcion suele fallar por lo que se  recomienda usar la funcion de abrir archivo 
+## Call browser (Open URL in default browser)
+> On Linux this option usually fails, so it is recommended to use the open file function instead.
 `{ action: "callBrowser", url }`
-## Obtener direccion de ejecucion en el dispositivo
+## Get execution directory on the device
 `{ action: "get_document_in_pc_direction" }`
-
-
