@@ -1,6 +1,6 @@
 /*
  * ===============|==========================================================|
- *   Catcheer     | Windows core main-module (Webview2) v1.09                |
+ *   Catcheer     | Windows core main-module (Webview2) v1.11                |
  * _______________|__________________________________________________________|
  */
 
@@ -135,7 +135,18 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
 //------------------------- Init_webview2 ----------------------------------|
 void InitializeWebView2(HWND hwnd) {
     auto options = Microsoft::WRL::Make<CoreWebView2EnvironmentOptions>();
-    options->put_AdditionalBrowserArguments(L"--allow-file-access-from-files --enable-gpu --enable-webgl --autoplay-policy=no-user-gesture-required");
+    options->put_AdditionalBrowserArguments(//recover original flags
+        L"--allow-file-access-from-files "
+        L"--enable-gpu "
+        L"--enable-webgl "
+        L"--ignore-gpu-blocklist "
+        L"--use-angle=gl "
+        L"--enable-zero-copy "
+        L"--enable-gpu-rasterization "
+        L"--enable-native-gpu-memory-buffers "
+        L"--autoplay-policy=no-user-gesture-required "
+        L"--enable-features=Fullscreen"
+    );
 
     CreateCoreWebView2EnvironmentWithOptions(nullptr, nullptr, options.Get(),
         Microsoft::WRL::Callback<ICoreWebView2CreateCoreWebView2EnvironmentCompletedHandler>(

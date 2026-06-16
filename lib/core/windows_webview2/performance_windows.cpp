@@ -2,17 +2,17 @@
 #include <psapi.h>
 
 void PerformanceBooster::Boost() {
-    // Elevar prioridad del proceso
+    // hight proprity to process
     SetPriorityClass(GetCurrentProcess(), HIGH_PRIORITY_CLASS);
 
-    // Aumentar prioridad del hilo principal
+    // give hight proprity to main thread
     SetThreadPriority(GetCurrentThread(), THREAD_PRIORITY_HIGHEST);
 
-    // Reservar mas memoria virtual si es necesario (opcional)
-    SIZE_T minWorkingSet = 128 * 1024 * 1024; // 128 MB
-    SIZE_T maxWorkingSet = 512 * 1024 * 1024; // 512 MB
+    // reserve more RAM (optional)
+    SIZE_T minWorkingSet = 128 * 1024 * 1024; // Default 128 MB
+    SIZE_T maxWorkingSet = 512 * 1024 * 1024; // Default 512 MB
     SetProcessWorkingSetSize(GetCurrentProcess(), minWorkingSet, maxWorkingSet);
 
-    // Activar modo de ejecucion continua (evita throttling en chromebooks)
+    // enable continuous execution mode (void throttling in low end laptops)
     SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED | ES_DISPLAY_REQUIRED);
 }
