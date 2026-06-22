@@ -96,3 +96,8 @@ Catcheer offers an "api" based on simple web messages to facilitate basic operat
 `{ action: "callBrowser", url }`
 ## Get execution directory on the device
 `{ action: "get_document_in_pc_direction" }`
+
+---
+
+[![Ko-fi](https://img.shields.io/badge/Support-Ko--fi-FF5E5B?logo=kofi&logoColor=white)](https://ko-fi.com/sromandev#avatarModalO)
+

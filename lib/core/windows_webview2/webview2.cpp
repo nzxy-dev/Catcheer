@@ -135,7 +135,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
 //------------------------- Init_webview2 ----------------------------------|
 void InitializeWebView2(HWND hwnd) {
     auto options = Microsoft::WRL::Make<CoreWebView2EnvironmentOptions>();
-    options->put_AdditionalBrowserArguments(L"--allow-file-access-from-files --enable-gpu --enable-webgl --autoplay-policy=no-user-gesture-required");
+    options->put_AdditionalBrowserArguments(L"--allow-file-access-from-files --enable-gpu --enable-webgl --autoplay-policy=no-user-gesture-required");//yep again
 
     CreateCoreWebView2EnvironmentWithOptions(nullptr, nullptr, options.Get(),
         Microsoft::WRL::Callback<ICoreWebView2CreateCoreWebView2EnvironmentCompletedHandler>(
