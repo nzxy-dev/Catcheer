@@ -101,3 +101,5 @@ Catcheer offers an "api" based on simple web messages to facilitate basic operat
 
 [![Ko-fi](https://img.shields.io/badge/Support-Ko--fi-FF5E5B?logo=kofi&logoColor=white)](https://ko-fi.com/sromandev#avatarModalO)
 
+[![itch.io](https://img.shields.io/badge/site-itchio?logo=itch.io&label=itch&labelColor=%23454545&color=%23ff5555)](https://nxzy-dev.itch.io/catcheer)
+[![SourceForge](https://img.shields.io/badge/repo-SourceForge?logo=sourceforge&label=sourceforge&labelColor=%23454545&color=%23f76503)](https://sourceforge.net/projects/catcheer/)
